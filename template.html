@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Modern Promethease</title>
+  <style>
+    :root {{--background: #333;--Good: #464;--Bad: #446;--Neutral: #444;--primary: rgb(100, 64, 105);--link: rgb(103, 194, 255);}}h1, h2 {{font-family: 'Poppins', sans-serif;}}body {{font-family: 'Noto Serif', serif;color:white;background-color : var(--background);z-index: 9999;margin-left: 20px;margin-right: 20px;}}a {{color: var(--link);text-decoration:none;}}.content {{position: fixed;left: 0;right: 0;z-index: 9999;margin-left: 20px;margin-right: 20px;}}html, body {{max-width: 100%;overflow-x: hidden;}}.snpdiv {{background-color: var(--Neutral);padding-left: 20px;padding-right: 20px;padding-top: 20px;padding-bottom: 20px;}}.Good {{background-color: var(--Good);}}.Bad {{background-color: var(--Bad);}}.snpdiv-header {{display: flex;flex-direction: row;}}.header-main {{flex-grow: 4;}}.magnitude {{text-align: right;padding-right: 25px;padding-left: 10px;margin: auto;height: 50%;}}.arrow {{text-align: right;cursor: pointer;user-select: none;margin: auto;height: 50%;}}.arrow-up {{transition: 300ms;transform: rotate(180deg);}}.arrow-down {{transition: 300ms;transform: rotate(0deg);}}.snpdiv p {{margin-bottom:0;}}a {{cursor: pointer;}}.search-bar {{display: flex;flex-direction: row;align-items: center;justify-content: center;width: 40%;}}.check-box {{border-radius: 3px;margin-right: 20px;margin-left: 20px;}}.check-boxes {{display: flex;flex-direction: row;align-items: center;justify-content: center;}}button {{cursor: pointer;margin-left: 10px;height: 30px;}}#search-bar {{width: 80%;height: 30px;border: 0px solid var(--background);border-radius: 3px;padding-left: 10px;padding-right: 10px;}}label {{justify-content: center;font-family: Poppins, sans-serif;}}#logo {{height: auto;margin-left: 20px;margin-right: 20px;}}.nav-wrapper {{position: fixed;top: 0;left: 0;right: 0;z-index: 9999;background-color: var(--primary);display: flex;flex-direction: row;align-items: center;justify-content: space-between;padding-left: 20px;padding-right: 20px;}}img{{display:block;margin:0 auto;width:300px;user-select: none;pointer-events: none;}}#search-button, #clear-button {{height: 35px;border: 2px solid rgb(255, 255, 255);border-radius: 10px;background-color: var(--primary);font-family: 'Poppins', sans-serif;color: #fff;}}.input-check {{border: 5px solid #fff;border-radius: 3px;height: 20px;width: 20px;font-family: Poppins, sans-serif;outline: #fff;margin: 0px;}}#checkbox-Good {{accent-color: var(--Good);}}#checkbox-Bad {{accent-color: var(--Bad);}}#checkbox-neutral {{accent-color: var(--Neutral);}}.input-check:not(:checked) {{opacity: 0;}}.check-outline {{border: 2px solid #fff;border-radius: 3px;height: 20px;width: 20px;font-family: Poppins, sans-serif;outline: #fff;margin:auto;}}
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>function object_to_html(a){{return console.log(a),description=(description=(description=a.description).replace(/\$/g,"<br>")).replace(/\[\[([^\]]+)\]\]/g,'<a href="https://www.snpedia.com/index.php/$1">$1</a>'),geno_description=a.geno_description,geno_description=geno_description.replace(/\$/g,"<br>"),geno_description=geno_description.replace(/\[\[([^\]]+)\]\]/g,'<a href="https://www.snpedia.com/index.php/$1">$1</a>'),"nan"==description&&(description=""),geno_link=`<a href="https://www.snpedia.com/index.php/${{a.rsid}}(${{a.geno[0]}};${{a.geno[1]}})">${{a.geno}}</a>`,""==geno_description?geno_link=a.geno:geno_description=`<p>${{geno_description}}</p>`,summary=""==a.summary?"":": "+a.summary,character="o","Good"==a.repute?character="+":"Bad"==a.repute&&(character="—"),gene_text="",""!=a.gene&&(gene_text=`<h3>Gene: ${{a.gene}}</h3>`),`
+  <div class="${{a.repute}}-break">
+  <br><br>
+  </div>
+    <div class="snpdiv ${{a.repute}}" id="${{a.rsid}}">
+    <div class="snpdiv-header">
+      <h2 class="header-main">${{character}} <a href="https://www.snpedia.com/index.php/${{a.rsid}}">${{a.rsid}}</a> (${{geno_link}})${{summary}}</h2>
+      <h2 class="magnitude">${{a.mag}}</h2><h2 class="arrow">V</h2>
+    </div>
+      <div style="clear: both;"></div>
+      <div class="snpdiv-body">
+      ${{gene_text}}
+      ${{geno_description}}
+      <p>${{description.split("<br>")[0]}}</p>
+      </div>
+    </div>
+    `}}var at_at_time=10,loaded=0,searching=!1;$(document).ready(function(){{"undefined"==typeof data&&$("h1").text("No data"),$("input[type=checkbox]").each(function(){{$(this).prop("checked",!0)}}),$("#checkbox-Bad").each(function(){{$(this).prop("checked",!1)}});var b=object_to_html(data[0]);$(".container").html(b),loaded++;for(var a=1;a<at_at_time-1;a++){{var c=data[a],b=object_to_html(c);$(".snpdiv").last().after(b),$(".snpdiv-body").hide(),loaded++}}$(".Bad").hide(),$(".Bad-break").hide();for(var a=0;a<3;a++)d();function d(){{!searching&&$(window).scrollTop()+$(window).height()>=$(document).height()-10&&(loaded>data.length||setTimeout(function(){{for(var a=loaded;a<loaded+at_at_time&&!(a>=data.length);a++)$(".snpdiv").last().after(object_to_html(data[a])),$(".snpdiv").last().find(".snpdiv-body").hide(),$(`#checkbox-${{data[a].repute}}`).prop("checked")||($(".snpdiv").last().hide(),$(`.${{data[a].repute}}-break`).last().hide());(loaded+=at_at_time)>data.length&&(loaded=data.length)}},200))}}function e(c,b){{for(var a=0;a<b.length;a++)if(c.summary.includes(b[a])||c.gene.includes(b[a])||c.rsid==b[a])return!0;return!1}}function f(c,b){{for(var a=0;a<b.length;a++)if(c.description.includes(b[a])||c.geno_description.includes(b[a]))return!0;return!1}}$("body").on("mouseenter",".Bad",function(){{$(this).css("background-color","#447")}}),$("body").on("mouseleave",".Bad",function(){{$(this).css("background-color","#446")}}),$("body").on("mouseenter",".Good",function(){{$(this).css("background-color","#474")}}),$("body").on("mouseleave",".Good",function(){{$(this).css("background-color","#464")}}),$("body").on("mouseenter",".neutral",function(){{$(this).css("background-color","#555")}}),$("body").on("mouseleave",".neutral",function(){{$(this).css("background-color","#4b4b4b")}}),$("body").on("click",".arrow",function(a){{"A"!=a.target.tagName&&$(this).parent().parent().find(".snpdiv-body").slideToggle(300),$(this).hasClass("arrow-up")?($(this).removeClass("arrow-up"),$(this).addClass("arrow-down")):($(this).addClass("arrow-up"),$(this).removeClass("arrow-down"))}}),$(window).scroll(function(){{d()}}),$("#search-bar").keypress(function(a){{13==a.which&&$("#search-button").click()}}),$("#search-button").click(function(){{if(searching=!0,""!=(text=$("#search-bar").val().split(" "))){{$(".snpdiv").remove(),rows=[];for(var a=0;a<data.length;a++)e(c=data[a],text)&&rows.push(c);for(var a=0;a<zero_mag.length;a++)e(c=zero_mag[a],text)&&rows.push(c);for(var a=0;a<data.length;a++)f(c=data[a],text)&&!rows.includes(c)&&rows.push(c);for(var a=0;a<zero_mag.length;a++)f(c=zero_mag[a],text)&&!rows.includes(c)&&rows.push(c);if(0==rows.length){{$(".container").html("<br><br><h2>No results for "+text+"</h2>");return}}var b=object_to_html(rows[0]);$(".container").html(b);for(var a=1;a<rows.length;a++)$(".snpdiv").last().after(object_to_html(rows[a]));$(".snpdiv").find(".snpdiv-body").hide(),$("input[type=checkbox]").each(function(){{$(this).prop("checked")||($(`.${{$(this).attr("id").split("-")[1]}}-break`).hide(),$(`.${{$(this).attr("id").split("-")[1]}}`).hide())}})}}}}),$("#clear-button").click(function(){{searching=!1,$(".snpdiv").remove(),$(".container").html(object_to_html(data[0]));for(var a=1;a<loaded;a++)$(".snpdiv").last().after(object_to_html(data[a]));$(".snpdiv").find(".snpdiv-body").hide(),$("#search-bar").val(""),$("input[type=checkbox]").each(function(){{$(this).prop("checked")||($(`.${{$(this).attr("id").split("-")[1]}}-break`).hide(),$(`.${{$(this).attr("id").split("-")[1]}}`).hide())}})}}),$("#checkbox-Bad").click(function(){{$(this).is(":checked")?($(".Bad").show(),$(".Bad-break").show()):($(".Bad").hide(),$(".Bad-break").hide()),d()}}),$("#checkbox-Good").click(function(){{$(this).is(":checked")?($(".Good").show(),$(".Good-break").show()):($(".Good").hide(),$(".Good-break").hide()),d()}}),$("#checkbox-neutral").click(function(){{$(this).is(":checked")?($(".neutral").show(),$(".neutral-break").show()):($(".neutral").hide(),$(".neutral-break").hide()),d()}})}})</script>
+  <script>
+  {script_text}
+  </script>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <h1>The Modern Promethease</h1>
+      <small>Data courtesy of <a href="https://snpedia.com/">SNPedia</a>.</small>
+      <div class="search-bar">
+        <input type="text" id="search-bar" placeholder="Search for a condition, gene, or rsid...">
+        <button id="search-button">Search</button>
+        <button id="clear-button">Clear</button>
+      </div>
+      <!-- check boxes good/bad/neutral -->
+      <div class="check-boxes">
+        <div class="check-box">
+          <div class="check-outline">
+          <input class="input-check" type="checkbox" id="checkbox-Good" checked>
+        </div>
+          <label for="checkbox-Good">Good</label>
+        </div>
+        <div class="check-box">
+          <div class="check-outline">
+          <input class="input-check" type="checkbox" id="checkbox-neutral">
+        </div>
+          <label for="checkbox-neutral">Neutral</label>
+        </div>
+        <div class="check-box">
+          <div class="check-outline">
+          <input class="input-check" type="checkbox" id="checkbox-Bad">
+        </div>
+          <label for="checkbox-Bad">Bad</label>
+        </div>
+        </div>
+    </div>
+    <br><br>
+  <div class="container"></div>
+  <div class="end">
+    <br><br>
+  <img src="DNA.svg" alt="DNA" class="DNA">
+  <br>
+</div>
+</body>
+
+</html>
