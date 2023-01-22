@@ -1,0 +1,10 @@
+scripts/app.js
+scripts/style.css
+report.html
+snpedia_data.csv
+*.zip
+genome.txt
+data/genome.txt
+data/report.html
+report.html
+scripts/*

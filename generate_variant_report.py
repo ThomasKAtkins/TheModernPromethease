@@ -7,7 +7,22 @@ import re
 import base64
 import sys
 
-if len(sys.argv) < 4:
+# ignore settingwithcopy warning
+import warnings
+warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
+warnings.filterwarnings("ignore", category=pd.errors.SettingWithCopyWarning)
+
+if len(sys.argv)==2:
+    user_path = sys.argv[1]
+    snp_path = 'data/snp_df.csv'
+    geno_path = 'data/geno_df.csv'
+
+elif len(sys.argv)==4:
+    user_path = sys.argv[3]
+    snp_path = sys.argv[1]
+    geno_path = sys.argv[2]
+
+else:
   print(f"Usage: python {sys.argv[0]} <snp df> <geno df> <23andme file>")
   exit()
 
@@ -129,11 +144,11 @@ def process_geno_dataset(filename):
 
 
 # process the two files from SNPedia to get dataframes
-snp_df = process_SNP_dataset(sys.argv[1])
-geno_df = process_geno_dataset(sys.argv[2])
+snp_df = process_SNP_dataset(snp_path)
+geno_df = process_geno_dataset(geno_path)
 
 # read the user's genome file from 23andMe
-genome = pd.read_csv(sys.argv[3], sep='\t')
+genome = pd.read_csv(user_path, sep='\t')
 
 mags = []
 rsids = []
@@ -147,10 +162,13 @@ chrs = []
 pos = []
 genes = []
 
+# filter genome to only include SNPs that are in SNPedia
+genome = genome[genome['rsid'].isin(snp_df['rsid'].values)]
+
 # iterate through all the SNPs from SNPedia
 for i, row in enumerate(geno_df.itertuples()):
     # print progress
-    if i % 100 == 0:
+    if i % 1000 == 0:
         print(f"Processed {100*i/len(geno_df):.2f}% of data...")
     if row.rsid in genome['rsid'].values:  # if the SNP is genotyped by 23andme
 
@@ -206,11 +224,11 @@ df['mag'] = df['mag'].astype(float)
 df = df.sort_values(by=['mag'], ascending=False)
 
 # read the template
-with open("template.html", "r") as f:
+with open("variant_template.html", "r") as f:
     template = f.read()
 
 # write the final output to the html file as base-64 encoded strings
-with open('report.html', 'w') as f:
+with open('variant_report.html', 'w') as f:
   # write the javascript to the html file
     to_write = df[df['mag'] > 0].to_json(orient='records')
     to_write = base64.b64encode(to_write.encode('utf-8')).decode('utf-8')
@@ -220,3 +238,4 @@ with open('report.html', 'w') as f:
     script_text += f"var zero_mag = JSON.parse(atob(\"{str(to_write)}\"));"
     f.write(template.format(script_text=script_text))
  
+print("Done!")
