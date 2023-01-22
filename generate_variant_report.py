@@ -12,7 +12,17 @@ import warnings
 warnings.filterwarnings("ignore", category=pd.errors.DtypeWarning)
 warnings.filterwarnings("ignore", category=pd.errors.SettingWithCopyWarning)
 
-if len(sys.argv) < 4:
+if len(sys.argv)==2:
+    user_path = sys.argv[1]
+    snp_path = 'data/snp_df.csv'
+    geno_path = 'data/geno_df.csv'
+
+elif len(sys.argv)==4:
+    user_path = sys.argv[3]
+    snp_path = sys.argv[1]
+    geno_path = sys.argv[2]
+
+else:
   print(f"Usage: python {sys.argv[0]} <snp df> <geno df> <23andme file>")
   exit()
 
@@ -134,11 +144,11 @@ def process_geno_dataset(filename):
 
 
 # process the two files from SNPedia to get dataframes
-snp_df = process_SNP_dataset(sys.argv[1])
-geno_df = process_geno_dataset(sys.argv[2])
+snp_df = process_SNP_dataset(snp_path)
+geno_df = process_geno_dataset(geno_path)
 
 # read the user's genome file from 23andMe
-genome = pd.read_csv(sys.argv[3], sep='\t')
+genome = pd.read_csv(user_path, sep='\t')
 
 mags = []
 rsids = []
