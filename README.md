@@ -6,6 +6,10 @@ The Modern Promethease is a free and open source tool that replicates the functi
 
 ## Installation Instructions
 
+The code can be downloaded as a .zip file by clicking the green "Code" button in the upper right and selecting "Download ZIP".
+
+Alternatively, to install from the command line using git
+
 ```
 cd <path where you want to install The Modern Promethease>
 git clone https://github.com/ThomasKAtkins/TheModernPromethease.git
