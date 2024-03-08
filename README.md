@@ -1,5 +1,16 @@
 # The Modern Promethease
 
+> [!CAUTION]
+> The author no longer recommends using information from SNPedia, or tools that use information from SNPedia (such as this tool and Promethease) for the following reasons:
+>
+> 1. **SNP summaries are often misleading.** Given that many SNPs have wide-ranging effects, it is often impossible to summarize the effect of a SNP into one short phrase/sentence. See [rs6311](https://www.snpedia.com/index.php/Rs6311), [rs53576](https://www.snpedia.com/index.php/rs53576).
+>
+> 2. **Most SNPedia pages are infrequently updated.** Despite the ever-increasing understanding of genetic impacts on traits, many SNP summaries have not been updated in the past 5 years.
+>
+> 3. **Giving information on a per-SNP basis ignores the complex genetic architecture underlying many human traits.** It is well known that most human traits are polygenic, and in many cases, the impact of a single SNP on a trait is small. Presenting genome interpretation in a SNP-first (rather than genome-wide) context risks misleading users about their relative odds of traits.
+> 
+> While its use is no longer recommended, the tool will remain here as an archive.
+
 Please see the [disclaimers](https://github.com/ThomasKAtkins/TheModernPromethease/blob/main/disclaimer.md).
 
 The Modern Promethease is a free and open source tool that replicates the functionality of the tool [Promethease](https://promethease.com/). This tool creates a sumamry of a user's data from the popular genotyping service 23andMe. Example output for the user [Lilly Mendel](https://www.snpedia.com/index.php/User:Lilly_Mendel) is provided in the `mendelgenome/` folder.
